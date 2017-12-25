@@ -27,6 +27,11 @@ namespace WoodULike.Models
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime PublishDate { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "Project Type")]
+        public string ProjectType { get; set; }
+
     }
 
     public class WoodProjectDBContext: DbContext

@@ -13,7 +13,7 @@ namespace WoodULike.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712080240054_Initial"; }
+            get { return "201712251059440_Initial"; }
         }
         
         string IMigrationMetadata.Source

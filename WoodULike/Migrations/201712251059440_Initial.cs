@@ -16,6 +16,7 @@ namespace WoodULike.Migrations
                         ImageURL = c.String(),
                         Description = c.String(maxLength: 300),
                         PublishDate = c.DateTime(nullable: false),
+                        ProjectType = c.String(maxLength: 50),
                     })
                 .PrimaryKey(t => t.ID);
             
