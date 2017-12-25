@@ -10,6 +10,14 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+<p>
+    @using (Html.BeginForm("index", "WoodProjects", FormMethod.Get))
+    {
+        <p> Title: @Html.TextBox("SearchString") <br />
+    <input type="submit" value="Filter" /> </p>
+    }
+</p>
+
 <div class="container">
     <div class="row">
         @{

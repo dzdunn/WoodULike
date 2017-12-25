@@ -15,9 +15,17 @@ namespace WoodULike.Controllers
         private WoodProjectDBContext db = new WoodProjectDBContext();
 
         // GET: WoodProjects
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.WoodProjects.ToList());
+            var woodProjects = from m in db.WoodProjects
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                woodProjects = woodProjects.Where(s => s.ProjectTitle.Contains(searchString));
+            }
+
+            return View(woodProjects);
         }
 
         // GET: WoodProjects/Details/5
