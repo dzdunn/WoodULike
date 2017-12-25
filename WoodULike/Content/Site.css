@@ -1,0 +1,141 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/* Navbar colour scheme */
+.navbar {
+    background-color: #4cff00;
+    border-color: #701f00;
+}
+
+.navbar .navbar-brand {
+    color: #a44006;
+}
+
+.navbar .navbar-brand:hover{
+    background-color: #701f00;
+}
+
+.navbar .nav li a:hover {
+    background-color: #701f00;
+}
+
+.navbar .nav {
+    background-color: #4cff00;
+    
+}
+
+.navbar .nav li a {
+    color: #a44006;
+}
+
+.brandName {
+    color: #a44006;
+}
+
+#slideshowBrandName{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.tagline{
+    font-size: smaller;
+}
+
+
+
+/* Slideshow */
+
+
+.headline {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: xx-large;
+    
+    background-color: rgba(76, 255, 0, 0.7);
+    margin-left: -1px;
+}
+
+.mySlides {
+    margin-top: 8px;
+    min-height: 400px;
+    max-height: 400px;
+    min-width: 900px;
+    max-width: 900px;
+    position: center;
+    
+}
+
+.w3-animate-fading {
+    animation: fading 5s infinite
+}
+
+@keyframes fading {
+    0% {
+        opacity: 0.1
+    }
+
+    50% {
+        opacity: 0.7
+    }
+
+    100% {
+        opacity: 0.1
+    }
+}
+
+/*WoodULike Projects Page*/
+.projectList {
+    background-color: #4cff00;
+    border: 1px thick black;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.listingTitle{
+    font-weight: bold;
+    font-size: larger;
+    padding: 10px 0px 0px 10px;
+}
+
+.listingDetail {
+    font-size: smaller;
+    padding: 0px 0px 0px 10px;
+}
+
+#listingProjectImage {
+    max-width: 400px;
+    min-width: 400px;
+    height: auto;
+    padding: 5px;
+}
+
+
+
+
+
+

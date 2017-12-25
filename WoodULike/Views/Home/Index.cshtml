@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="col-sm-1">
+</div>
+<div class="col-sm-10 ">
+    <img class="mySlides w3-animate-fading" src="../Content/img/woodBoat1.jpg">
+    <img class="mySlides w3-animate-fading" src="../Content/img/woodBoat2.jpg">
+    <img class="mySlides w3-animate-fading" src="../Content/img/woodBoat3.jpg">
+    <p class="headline">Welcome to <span class="brandName" id="slideshowBrandName">WoodULike :)</span><br /><i><span class="tagline">Where wood meets the web...</span></i></p>
+</div>
+<div class="col-sm-1">
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <h2>Check out some WoodULike projects!</h2>
+        <p>
+            Here will link to a list of projects, possible categorised
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Sign up and share your own projects</h2>
+        <p>Here will link to a sign up page to encourage new members to join and share projects</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+<script>
+
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) { myIndex = 1 }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 4000);
+    }
+
+ @*   var slideIndex = 0;
+    showSlides();
+
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 5000); // Change image every 2 seconds
+
+    }
+
+     *@
+  
+
+    //$(document).ready(function () {
+
+    //    $('.cycle-slideshow').cycle({
+    //        fx: 'fade',
+    //        pause: 1,
+    //        prev: '#prev',
+    //        next: '#next'
+
+    //    });
+    //});
+       
+
+      
+
+        @*$(".mySlides").fadeToggle(1000);*@
+
+       
+       
+</script>

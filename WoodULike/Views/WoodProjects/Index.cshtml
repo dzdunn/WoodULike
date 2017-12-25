@@ -1,0 +1,157 @@
+﻿@model IEnumerable<WoodULike.Models.WoodProject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="container">
+    <div class="row">
+        @{
+            int cnt1 = 0;
+            foreach (var listing in Model)
+            {
+                if (cnt1 % 2 == 0)
+                {
+                    <div class="col-md-6">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-10 projectList">
+                                    <p class="listingTitle" id="listingProjectName">
+                                        @Html.DisplayNameFor(model => model.ProjectTitle)
+                                    </p>
+                                    <p class="listingDetail" id="listingProjectName">
+                                        @Html.DisplayFor(model => listing.ProjectTitle)
+                                    </p>
+                                    <p class="listingTitle" id="listingProjectImage">
+                                        @Html.DisplayNameFor(model => model.ImageURL)
+                                    </p>
+                                    <div class="img-wrap">
+                                        <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
+                                    </div>
+                                    <p class="listingTitle" id="listingProjectDescription">
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </p>
+                                    <p class="listingDetail" id="listingProjectDescription">
+                                        @Html.DisplayFor(model => listing.Description)
+                                    </p>
+                                </div>
+                                <div class="col-md-2 projectList">
+                                    <p class="listingTitle" id="listingProjectDate">
+                                        @Html.DisplayNameFor(model => model.PublishDate)
+                                    </p>
+                                    <p class="listingDetail" id="listingProjectDate">
+                                        @Html.DisplayFor(model => listing.PublishDate)
+                                    </p>
+                                    <p class="listingDetail" id="listingLinks">
+                                        @Html.ActionLink("Edit", "Edit", new { id = listing.ID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = listing.ID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = listing.ID })
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                cnt1++;
+            }
+            int cnt2 = 0;
+            foreach (var listing in Model)
+            {
+                if (cnt2 % 2 != 0)
+                {
+                <div class="col-md-6">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10 projectList">
+                                <p class="listingTitle" id="listingProjectName">
+                                    @Html.DisplayNameFor(model => model.ProjectTitle)
+                                </p>
+                                <p class="listingDetail" id="listingProjectName">
+                                    @Html.DisplayFor(model => listing.ProjectTitle)
+                                </p>
+                                <p class="listingTitle" id="listingProjectImage">
+                                    @Html.DisplayNameFor(model => model.ImageURL)
+                                </p>
+                                <div class="img-wrap">
+                                    <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
+                                </div>
+                                <p class="listingTitle" id="listingProjectDescription">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </p>
+                                <p class="listingDetail" id="listingProjectDescription">
+                                    @Html.DisplayFor(model => listing.Description)
+                                </p>
+                            </div>
+                            <div class="col-md-2 projectList">
+                                <p class="listingTitle" id="listingProjectDate">
+                                    @Html.DisplayNameFor(model => model.PublishDate)
+                                </p>
+                                <p class="listingDetail" id="listingProjectDate">
+                                    @Html.DisplayFor(model => listing.PublishDate)
+                                </p>
+                                <p class="listingDetail" id="listingLinks">
+                                    @Html.ActionLink("Edit", "Edit", new { id = listing.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = listing.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = listing.ID })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    }
+                    cnt2++;
+                }
+            }
+    </div>
+</div>
+
+
+
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublishDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectTitle)
+            </td>
+            <td width="40%">
+                <img src="@Html.DisplayFor(modelItem => item.ImageURL).ToString()" id="woodProjectTableImg" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>*@
