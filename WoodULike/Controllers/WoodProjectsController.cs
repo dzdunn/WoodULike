@@ -54,7 +54,7 @@ namespace WoodULike.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,PublishDate")] WoodProject woodProject)
+        public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,PublishDate,ProjectType")] WoodProject woodProject)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace WoodULike.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ProjectTitle,ImageURL,Description,PublishDate")] WoodProject woodProject)
+        public ActionResult Edit([Bind(Include = "ID,ProjectTitle,ImageURL,Description,PublishDate,ProjectType")] WoodProject woodProject)
         {
             if (ModelState.IsValid)
             {

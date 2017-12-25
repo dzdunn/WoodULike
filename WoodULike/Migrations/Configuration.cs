@@ -4,6 +4,7 @@ namespace WoodULike.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using WoodULike.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WoodULike.Models.WoodProjectDBContext>
     {
@@ -15,10 +16,17 @@ namespace WoodULike.Migrations
 
         protected override void Seed(WoodULike.Models.WoodProjectDBContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            context.WoodProjects.AddOrUpdate(c => c.ProjectTitle,
+                new WoodProject
+                {
+                    ProjectTitle = "Planter",
+                    ImageURL = "https://i.pinimg.com/originals/41/52/75/415275890ca2c956f54a5032dd6e651f.jpg",
+                    ProjectType = "Garden",
+                    PublishDate = DateTime.Parse("12-11-2017"),
+                    Description = "This is a garden planter like a boat"
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            });
+
         }
     }
 }
