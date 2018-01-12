@@ -33,9 +33,9 @@
                 if (cnt1 % 2 == 0)
                 {
                     <div class="col-md-6">
-                        <div class="container">
+                        <div class="container projectList">
                             <div class="row">
-                                <div class="col-md-10 projectList">
+                                <div class="col-md-8" id="leftSide">
                                     <p class="listingTitle" id="listingProjectName">
                                         @Html.DisplayNameFor(model => model.ProjectTitle)
                                     </p>
@@ -65,10 +65,8 @@
 
 
                                 </div>
-                                <div class="col-md-2 projectList">
-                                    <p class="listingTitle" id="listingProjectDate">
-                                        @Html.DisplayNameFor(model => model.PublishDate)
-                                    </p>
+                                <div class="col-md-4 text-right" id="rightSide">
+                                    
                                     <p class="listingDetail" id="listingProjectDate">
                                         @Html.DisplayFor(model => listing.PublishDate)
                                     </p>
@@ -90,9 +88,9 @@
                 if (cnt2 % 2 != 0)
                 {
                 <div class="col-md-6">
-                    <div class="container">
+                    <div class="container projectList">
                         <div class="row">
-                            <div class="col-md-10 projectList">
+                            <div class="col-md-8 " id="leftSide">
                                 <p class="listingTitle" id="listingProjectName">
                                     @Html.DisplayNameFor(model => model.ProjectTitle)
                                 </p>
@@ -118,10 +116,7 @@
                                     @Html.DisplayFor(model => listing.ProjectType)
                                 </p>
                             </div>
-                            <div class="col-md-2 projectList">
-                                <p class="listingTitle" id="listingProjectDate">
-                                    @Html.DisplayNameFor(model => model.PublishDate)
-                                </p>
+                            <div class="col-md-4 text-right" id="rightSide">                                
                                 <p class="listingDetail" id="listingProjectDate">
                                     @Html.DisplayFor(model => listing.PublishDate)
                                 </p>
