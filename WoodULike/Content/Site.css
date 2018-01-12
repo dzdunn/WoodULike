@@ -112,14 +112,15 @@ textarea {
     background-color: #4cff00;
     border: 1px thick black;
     margin-bottom: 10px;
-    border-radius: 25px;
-    padding: 5px;
+    border-radius: 10px;
+    padding: 15px;
 }
 
 .listingTitle{
     font-weight: bold;
     font-size: larger;
-    padding: 10px 0px 0px 10px;
+    padding: 0px 0px 0px 10px;
+    margin-top: -5px;
 }
 
 .listingDetail {
@@ -127,16 +128,19 @@ textarea {
     padding: 0px 0px 0px 10px;
 }
 
-#listingProjectImage {
-    max-width: 400px;
-    min-width: 400px;
-    height: auto;
-    padding: 5px;
+
+#imageContainer img {
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+    border-bottom-left-radius: 5px;
 }
 
-#rightSide{
-    padding-right: 25px;
-    padding-top: 10px;
+
+
+
+.projectTitleSpan{
+font-weight: normal;
 }
 
 

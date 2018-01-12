@@ -9,8 +9,8 @@
 </p>
 <div class="container">
     <div class="row">
-        <div class="col-md-9"></div>
-        <div class="col-md-3">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 text-right">
             <p>
                 @using (Html.BeginForm("index", "WoodProjects", FormMethod.Get))
             {
@@ -35,45 +35,42 @@
                     <div class="col-md-6">
                         <div class="container projectList">
                             <div class="row">
-                                <div class="col-md-8" id="leftSide">
-                                    <p class="listingTitle" id="listingProjectName">
-                                        @Html.DisplayNameFor(model => model.ProjectTitle)
-                                    </p>
-                                    <p class="listingDetail" id="listingProjectName">
-                                        @Html.DisplayFor(model => listing.ProjectTitle)
-                                    </p>
-                                    <p class="listingTitle" id="listingProjectImage">
-                                        @Html.DisplayNameFor(model => model.ImageURL)
-                                    </p>
-                                    <div class="img-wrap">
-                                        <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
+                                <div class="col-md-12">
+                                    <div class="text-right pull-right">
+
+                                        <p class="listingDetail" id="listingProjectDate">
+                                            @Html.DisplayFor(model => listing.PublishDate)
+                                        </p>
+                                        <p class="listingDetail" id="listingLinks">
+                                            @Html.ActionLink("Edit", "Edit", new { id = listing.ID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = listing.ID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = listing.ID })
+                                        </p>
                                     </div>
-                                    <p class="listingTitle" id="listingProjectDescription">
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="listingTitle" id="listingProjectName">
+                                        @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
+                                    </p>
+                                    <div class="pull-left">
+                                        <div class="img-wrap" id="imageContainer">
+                                            <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <p class="listingTitle text-right" id="listingProjectDescription">
                                         @Html.DisplayNameFor(model => model.Description)
                                     </p>
-                                    <p class="listingDetail" id="listingProjectDescription">
+                                    <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.Description)
                                     </p>
-
-
-                                    <p class="listingTitle" id="listingProjectDescription">
+                                    <br/>
+                                    <p class="listingTitle text-right" id="listingProjectDescription">
                                         @Html.DisplayNameFor(model => model.ProjectType)
                                     </p>
-                                    <p class="listingDetail" id="listingProjectDescription">
+                                    <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.ProjectType)
-                                    </p>
-
-
-                                </div>
-                                <div class="col-md-4 text-right" id="rightSide">
-                                    
-                                    <p class="listingDetail" id="listingProjectDate">
-                                        @Html.DisplayFor(model => listing.PublishDate)
-                                    </p>
-                                    <p class="listingDetail" id="listingLinks">
-                                        @Html.ActionLink("Edit", "Edit", new { id = listing.ID }) |
-                                        @Html.ActionLink("Details", "Details", new { id = listing.ID }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = listing.ID })
                                     </p>
                                 </div>
                             </div>
@@ -87,52 +84,53 @@
             {
                 if (cnt2 % 2 != 0)
                 {
-                <div class="col-md-6">
-                    <div class="container projectList">
-                        <div class="row">
-                            <div class="col-md-8 " id="leftSide">
-                                <p class="listingTitle" id="listingProjectName">
-                                    @Html.DisplayNameFor(model => model.ProjectTitle)
-                                </p>
-                                <p class="listingDetail" id="listingProjectName">
-                                    @Html.DisplayFor(model => listing.ProjectTitle)
-                                </p>
-                                <p class="listingTitle" id="listingProjectImage">
-                                    @Html.DisplayNameFor(model => model.ImageURL)
-                                </p>
-                                <div class="img-wrap">
-                                    <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
+                    <div class="col-md-6">
+                        <div class="container projectList">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-right pull-right">
+                                        <p class="listingDetail" id="listingProjectDate">
+                                            @Html.DisplayFor(model => listing.PublishDate)
+                                        </p>
+                                        <p class="listingDetail" id="listingLinks">
+                                            @Html.ActionLink("Edit", "Edit", new { id = listing.ID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = listing.ID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = listing.ID })
+                                        </p>
+                                    </div>
                                 </div>
-                                <p class="listingTitle" id="listingProjectDescription">
-                                    @Html.DisplayNameFor(model => model.Description)
-                                </p>
-                                <p class="listingDetail" id="listingProjectDescription">
-                                    @Html.DisplayFor(model => listing.Description)
-                                </p>
-                                <p class="listingTitle" id="listingProjectDescription">
-                                    @Html.DisplayNameFor(model => model.ProjectType)
-                                </p>
-                                <p class="listingDetail" id="listingProjectDescription">
-                                    @Html.DisplayFor(model => listing.ProjectType)
-                                </p>
-                            </div>
-                            <div class="col-md-4 text-right" id="rightSide">                                
-                                <p class="listingDetail" id="listingProjectDate">
-                                    @Html.DisplayFor(model => listing.PublishDate)
-                                </p>
-                                <p class="listingDetail" id="listingLinks">
-                                    @Html.ActionLink("Edit", "Edit", new { id = listing.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = listing.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = listing.ID })
-                                </p>
+                                <div class="col-md-12">
+                                    <p class="listingTitle" id="listingProjectName">
+                                        @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
+                                    </p>
+                                    <div class="pull-left">
+                                        <div class="img-wrap" id="imageContainer">
+                                            <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <p class="listingTitle text-right" id="listingProjectDescription">
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </p>
+                                    <p class="listingDetail text-right" id="listingProjectDescription">
+                                        @Html.DisplayFor(model => listing.Description)
+                                    </p>
+                                    <br />
+                                    <p class="listingTitle text-right" id="listingProjectDescription">
+                                        @Html.DisplayNameFor(model => model.ProjectType)
+                                    </p>
+                                    <p class="listingDetail text-right" id="listingProjectDescription">
+                                        @Html.DisplayFor(model => listing.ProjectType)
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                    }
-                    cnt2++;
                 }
+                cnt2++;
             }
+        }
     </div>
 </div>
 
