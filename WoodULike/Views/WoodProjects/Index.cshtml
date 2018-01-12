@@ -4,19 +4,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-<p>
-    @using (Html.BeginForm("index", "WoodProjects", FormMethod.Get))
-    {
-        <p> Title: @Html.TextBox("SearchString") <br />
-    <input type="submit" value="Filter" /> </p>
-    }
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <p>
+                @using (Html.BeginForm("index", "WoodProjects", FormMethod.Get))
+            {
+                <p>
+                    Project Search: @Html.TextBox("SearchString")
+                    <input type="submit" value="Search" class="btn btn-info" id="searchBtn" />
+                </p>
+                }
+                </p>
+            </div>
+        </div>
+    </div>
 
 <div class="container">
     <div class="row">
@@ -135,47 +141,8 @@
     </div>
 </div>
 
-
-
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PublishDate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectTitle)
-            </td>
-            <td width="40%">
-                <img src="@Html.DisplayFor(modelItem => item.ImageURL).ToString()" id="woodProjectTableImg" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublishDate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
-
-</table>*@
+<script>
+    $(#searchBtn).click(function () {
+        (#searchBtn).toggleClass("btn btn-success");
+    })
+</script>

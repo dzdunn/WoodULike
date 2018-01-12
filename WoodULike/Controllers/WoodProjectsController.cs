@@ -22,7 +22,7 @@ namespace WoodULike.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                woodProjects = woodProjects.Where(s => s.ProjectTitle.Contains(searchString));
+                woodProjects = woodProjects.Where(s => s.ProjectTitle.Contains(searchString) || s.ProjectType.Contains(searchString) || s.Description.Contains(searchString));
             }
 
             return View(woodProjects);
