@@ -48,8 +48,8 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <p class="listingTitle" id="listingProjectName">
+                                
+                                    <p class="listingTitle pull-left" id="listingProjectName">
                                         @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
                                     </p>
                                     <div class="pull-left">
@@ -72,7 +72,8 @@
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.ProjectType)
                                     </p>
-                                </div>
+                             
+                                
                             </div>
                         </div>
                     </div>
@@ -89,6 +90,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="text-right pull-right">
+
                                         <p class="listingDetail" id="listingProjectDate">
                                             @Html.DisplayFor(model => listing.PublishDate)
                                         </p>
@@ -99,31 +101,32 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <p class="listingTitle" id="listingProjectName">
-                                        @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
-                                    </p>
-                                    <div class="pull-left">
-                                        <div class="img-wrap" id="imageContainer">
-                                            <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
-                                        </div>
+
+                                <p class="listingTitle pull-left" id="listingProjectName">
+                                    @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
+                                </p>
+                                <div class="pull-left">
+                                    <div class="img-wrap" id="imageContainer">
+                                        <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
                                     </div>
-                                    <br />
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => model.Description)
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingProjectDescription">
-                                        @Html.DisplayFor(model => listing.Description)
-                                    </p>
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => model.ProjectType)
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingProjectDescription">
-                                        @Html.DisplayFor(model => listing.ProjectType)
-                                    </p>
                                 </div>
+                                <br />
+                                <br />
+                                <p class="listingTitle text-right" id="listingProjectDescription">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </p>
+                                <p class="listingDetail text-right" id="listingProjectDescription">
+                                    @Html.DisplayFor(model => listing.Description)
+                                </p>
+                                <br />
+                                <p class="listingTitle text-right" id="listingProjectDescription">
+                                    @Html.DisplayNameFor(model => model.ProjectType)
+                                </p>
+                                <p class="listingDetail text-right" id="listingProjectDescription">
+                                    @Html.DisplayFor(model => listing.ProjectType)
+                                </p>
+
+
                             </div>
                         </div>
                     </div>

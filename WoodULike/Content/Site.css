@@ -111,9 +111,12 @@ textarea {
 .projectList {
     background-color: #4cff00;
     border: 1px thick black;
-    margin-bottom: 10px;
     border-radius: 10px;
     padding: 15px;
+}
+
+.projectList p{
+    padding-right: 5px;
 }
 
 .listingTitle{
@@ -134,6 +137,7 @@ textarea {
     height: 250px;
     object-fit: cover;
     border-bottom-left-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 
@@ -143,6 +147,9 @@ textarea {
 font-weight: normal;
 }
 
+/*div, span, p {
+    border: 1px solid red;
+}*/
 
 
 
