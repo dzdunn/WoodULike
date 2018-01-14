@@ -24,20 +24,22 @@
         </div>
     </div>
 
-<div class="container">
-    <div class="row">
-        @{
-            int cnt1 = 0;
-            foreach (var listing in Model)
-            {
-                if (cnt1 % 2 == 0)
+    <div class="container">
+        <div class="row">
+            @{
+                int cnt1 = 0;
+                foreach (var listing in Model)
                 {
-                    <div class="col-md-6">
-                        <div class="container projectList">
+                    if (cnt1 % 2 == 0)
+                    {
+                        @*<div class="col-md-6">*@
+                        <div class="container projectList pull-left" style="max-width:45%">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <p class="listingTitle pull-left" id="listingProjectName">
+                                        @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
+                                    </p>
                                     <div class="text-right pull-right">
-
                                         <p class="listingDetail" id="listingProjectDate">
                                             @Html.DisplayFor(model => listing.PublishDate)
                                         </p>
@@ -48,16 +50,78 @@
                                         </p>
                                     </div>
                                 </div>
-                                
-                                    <p class="listingTitle pull-left" id="listingProjectName">
-                                        @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
-                                    </p>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+
                                     <div class="pull-left">
                                         <div class="img-wrap" id="imageContainer">
-                                            <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
+                                            <img class="img-responsive" src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
                                         </div>
                                     </div>
                                     <br />
+
+                                    <p class="listingTitle text-right" id="listingProjectDescription">
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </p>
+                                    <p class="listingDetail text-right" id="listingProjectDescription">
+                                        @Html.DisplayFor(model => listing.Description)
+                                    </p>
+                                    <br />
+                                    <p class="listingTitle text-right" id="listingProjectDescription">
+                                        @Html.DisplayNameFor(model => model.ProjectType)
+                                    </p>
+                                    <p class="listingDetail text-right" id="listingProjectDescription">
+                                        @Html.DisplayFor(model => listing.ProjectType)
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        @* </div> *@
+                    }
+                    cnt1++;
+                }
+                int cnt2 = 0;
+
+                foreach (var listing in Model)
+                {
+                    if (cnt2 % 2 != 0)
+                    {
+                        @*<div class="col-md-6">*@
+                        <div class="container projectList pull-left" style="max-width:45%">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="listingTitle pull-left" id="listingProjectName">
+                                        @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
+                                    </p>
+                                    <div class="text-right pull-right">
+                                        <p class="listingDetail" id="listingProjectDate">
+                                            @Html.DisplayFor(model => listing.PublishDate)
+                                        </p>
+                                        <p class="listingDetail" id="listingLinks">
+                                            @Html.ActionLink("Edit", "Edit", new { id = listing.ID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = listing.ID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = listing.ID })
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+
+                                    <div class="pull-left">
+                                        <div class="img-wrap" id="imageContainer">
+                                            <img class="img-responsive" src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
+                                        </div>
+                                    </div>
                                     <br />
                                     <p class="listingTitle text-right" id="listingProjectDescription">
                                         @Html.DisplayNameFor(model => model.Description)
@@ -65,80 +129,26 @@
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.Description)
                                     </p>
-                                    <br/>
+                                    <br />
                                     <p class="listingTitle text-right" id="listingProjectDescription">
                                         @Html.DisplayNameFor(model => model.ProjectType)
                                     </p>
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.ProjectType)
                                     </p>
-                             
-                                
-                            </div>
-                        </div>
-                    </div>
-                }
-                cnt1++;
-            }
-            int cnt2 = 0;
-            foreach (var listing in Model)
-            {
-                if (cnt2 % 2 != 0)
-                {
-                    <div class="col-md-6">
-                        <div class="container projectList">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="text-right pull-right">
 
-                                        <p class="listingDetail" id="listingProjectDate">
-                                            @Html.DisplayFor(model => listing.PublishDate)
-                                        </p>
-                                        <p class="listingDetail" id="listingLinks">
-                                            @Html.ActionLink("Edit", "Edit", new { id = listing.ID }) |
-                                            @Html.ActionLink("Details", "Details", new { id = listing.ID }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = listing.ID })
-                                        </p>
-                                    </div>
                                 </div>
-
-                                <p class="listingTitle pull-left" id="listingProjectName">
-                                    @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
-                                </p>
-                                <div class="pull-left">
-                                    <div class="img-wrap" id="imageContainer">
-                                        <img src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
-                                    </div>
-                                </div>
-                                <br />
-                                <br />
-                                <p class="listingTitle text-right" id="listingProjectDescription">
-                                    @Html.DisplayNameFor(model => model.Description)
-                                </p>
-                                <p class="listingDetail text-right" id="listingProjectDescription">
-                                    @Html.DisplayFor(model => listing.Description)
-                                </p>
-                                <br />
-                                <p class="listingTitle text-right" id="listingProjectDescription">
-                                    @Html.DisplayNameFor(model => model.ProjectType)
-                                </p>
-                                <p class="listingDetail text-right" id="listingProjectDescription">
-                                    @Html.DisplayFor(model => listing.ProjectType)
-                                </p>
-
-
                             </div>
+
                         </div>
-                    </div>
+                        @* </div> *@
+                    }
+                    cnt2++;
                 }
-                cnt2++;
             }
-        }
+        </div>
     </div>
-</div>
 
-<script>
-    $(#searchBtn).click(function () {
-        (#searchBtn).toggleClass("btn btn-success");
-    })
-</script>
+    <script>
+        
+    </script>

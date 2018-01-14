@@ -54,10 +54,11 @@ namespace WoodULike.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,PublishDate,ProjectType")] WoodProject woodProject)
+        public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,ProjectType")] WoodProject woodProject)
         {
             if (ModelState.IsValid)
             {
+                woodProject.PublishDate = DateTime.Now;
                 db.WoodProjects.Add(woodProject);
                 db.SaveChanges();
                 return RedirectToAction("Index");
