@@ -25,6 +25,9 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("WoodULike Projects", "Index", "WoodProjects")</li>
+
+                    @Html.Partial("_LoginPartial")
+                          
                 </ul>
             </div>
         </div>
@@ -36,10 +39,8 @@
             <p>&copy; @DateTime.Now.Year - WoodULike</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
     @RenderSection("scripts", required: false)
 </body>
 </html>

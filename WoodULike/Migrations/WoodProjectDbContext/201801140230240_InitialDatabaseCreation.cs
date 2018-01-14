@@ -1,9 +1,9 @@
-namespace WoodULike.Migrations
+namespace WoodULike.Migrations.WoodProjectDbContext
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class InitialDatabaseCreation : DbMigration
     {
         public override void Up()
         {

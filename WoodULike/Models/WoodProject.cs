@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WoodULike.Models
 {
@@ -31,11 +31,13 @@ namespace WoodULike.Models
         [StringLength(50)]
         [Display(Name = "Project Type")]
         public string ProjectType { get; set; }
+        
 
     }
 
     public class WoodProjectDBContext: DbContext
     {
         public DbSet<WoodProject> WoodProjects { get; set; }
+
     }
 }
