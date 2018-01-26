@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -12,13 +13,42 @@ namespace WoodULike.Controllers
 {
     public class WoodProjectsController : Controller
     {
-        private WoodProjectDBContext db = new WoodProjectDBContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: WoodProjects
         public ActionResult Index(string searchString)
         {
+            
             var woodProjects = from m in db.WoodProjects
-                         select m;
+                               select m;
+
+            //var usernames = from m in db.WoodProjects
+            //                join u in db.Users on m.UserId equals u.Id
+            //                select u.UserName;
+            
+            
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                woodProjects = woodProjects.Where(s => 
+                                                    s.ProjectTitle.Contains(searchString) || 
+                                                    s.ProjectType.Contains(searchString) ||
+                                                    s.Description.Contains(searchString));
+            }
+
+            woodProjects = woodProjects.OrderByDescending(x => x.PublishDate);
+
+            
+
+            return View(woodProjects);
+        }
+
+        public ActionResult MyWoodProjects(string searchString)
+        {
+            var user = User.Identity.GetUserId();
+            var woodProjects = from m in db.WoodProjects
+                               where m.UserId == user
+                               select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -56,8 +86,12 @@ namespace WoodULike.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,ProjectType")] WoodProject woodProject)
         {
+            
+
             if (ModelState.IsValid)
             {
+                var user = User.Identity.GetUserId();
+                woodProject.UserId = user;
                 woodProject.PublishDate = DateTime.Now;
                 db.WoodProjects.Add(woodProject);
                 db.SaveChanges();

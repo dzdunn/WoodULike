@@ -140,14 +140,11 @@ textarea {
    
 }
 
-    .projectList:hover {
-        background-color: rgba(164, 64, 6, 0.7);
-        color: white;
-    }
+.projectList:hover {
+    background-color: rgba(164, 64, 6, 0.7);
+    color: white;
+}
 
-/*.projectList p{
-    padding-right: 5px;
-}*/
 
 .listingTitle{
     font-weight: bold;
@@ -172,16 +169,12 @@ textarea {
     margin: -4px;
 }
 
-
-
-
 .projectTitleSpan{
 font-weight: normal;
 }
 
-/*div, span, p {
-    border: 1px solid red;
-}*/
+
+
 
 
 

@@ -11,7 +11,8 @@ namespace WoodULike.Models
 {
     public class WoodProject
     {
-        public int ID { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         [StringLength(50)]
         [Display(Name = "WoodULike Project")]
@@ -33,13 +34,14 @@ namespace WoodULike.Models
         [StringLength(50)]
         [Display(Name = "Project Type")]
         public string ProjectType { get; set; }
-        
+
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
+        public ApplicationUser ApplicationUser { get; set; }
 
     }
 
-    public class WoodProjectDBContext: DbContext
-    {
-        public DbSet<WoodProject> WoodProjects { get; set; }
 
-    }
+    
+  
 }

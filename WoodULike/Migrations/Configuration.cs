@@ -1,4 +1,4 @@
-namespace WoodULike.Migrations.ApplicationDbContext
+namespace WoodULike.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -10,8 +10,6 @@ namespace WoodULike.Migrations.ApplicationDbContext
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = @"Migrations\ApplicationDbContext";
-            ContextKey = "WoodULike.Models.ApplicationDbContext";
         }
 
         protected override void Seed(WoodULike.Models.ApplicationDbContext context)

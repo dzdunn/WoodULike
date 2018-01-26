@@ -206,16 +206,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ApplicationDbContext\201801140206281_InitialCreate.cs" />
-    <Compile Include="Migrations\ApplicationDbContext\201801140206281_InitialCreate.Designer.cs">
-      <DependentUpon>201801140206281_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201801252204190_InitialCreate.cs" />
+    <Compile Include="Migrations\201801252204190_InitialCreate.Designer.cs">
+      <DependentUpon>201801252204190_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ApplicationDbContext\Configuration.cs" />
-    <Compile Include="Migrations\WoodProjectDbContext\201801140230240_InitialDatabaseCreation.cs" />
-    <Compile Include="Migrations\WoodProjectDbContext\201801140230240_InitialDatabaseCreation.Designer.cs">
-      <DependentUpon>201801140230240_InitialDatabaseCreation.cs</DependentUpon>
+    <Compile Include="Migrations\201801252209003_addUserIdForeignKey.cs" />
+    <Compile Include="Migrations\201801252209003_addUserIdForeignKey.Designer.cs">
+      <DependentUpon>201801252209003_addUserIdForeignKey.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\WoodProjectDbContext\Configuration.cs" />
+    <Compile Include="Migrations\201801252308328_correctApplicationUser.cs" />
+    <Compile Include="Migrations\201801252308328_correctApplicationUser.Designer.cs">
+      <DependentUpon>201801252308328_correctApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\WoodProject.cs" />
@@ -257,6 +260,7 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\WoodProjects\MyWoodProjects.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -321,11 +325,14 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ApplicationDbContext\201801140206281_InitialCreate.resx">
-      <DependentUpon>201801140206281_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801252204190_InitialCreate.resx">
+      <DependentUpon>201801252204190_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\WoodProjectDbContext\201801140230240_InitialDatabaseCreation.resx">
-      <DependentUpon>201801140230240_InitialDatabaseCreation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801252209003_addUserIdForeignKey.resx">
+      <DependentUpon>201801252209003_addUserIdForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801252308328_correctApplicationUser.resx">
+      <DependentUpon>201801252308328_correctApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

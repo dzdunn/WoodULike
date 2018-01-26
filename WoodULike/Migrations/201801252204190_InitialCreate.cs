@@ -1,4 +1,4 @@
-namespace WoodULike.Migrations.ApplicationDbContext
+namespace WoodULike.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -75,6 +75,19 @@ namespace WoodULike.Migrations.ApplicationDbContext
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.WoodProjects",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ProjectTitle = c.String(maxLength: 50),
+                        ImageURL = c.String(),
+                        Description = c.String(maxLength: 300),
+                        PublishDate = c.DateTime(nullable: false),
+                        ProjectType = c.String(maxLength: 50),
+                    })
+                .PrimaryKey(t => t.ID);
+            
         }
         
         public override void Down()
@@ -89,6 +102,7 @@ namespace WoodULike.Migrations.ApplicationDbContext
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropTable("dbo.WoodProjects");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");

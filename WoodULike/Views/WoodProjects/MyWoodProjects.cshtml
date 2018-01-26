@@ -4,7 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <div class="container">
     <div class="row">
         <div class="col-md-6"></div>
@@ -30,7 +32,7 @@
                 {
                     if (cnt1 % 2 == 0)
                     {
-                       
+                        
                         <div class="container projectList pull-left" style="max-width:45%">
                             <div class="row">
                                 <div class="col-md-12">
@@ -41,7 +43,11 @@
                                         <p class="listingDetail" id="listingProjectDate">
                                             @Html.DisplayFor(model => listing.PublishDate)
                                         </p>
-                                        
+                                        <p class="listingDetail" id="listingLinks">
+                                            @Html.ActionLink("Edit", "Edit", new { id = listing.Id }) |
+                                            @Html.ActionLink("Details", "Details", new { id = listing.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = listing.Id })
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -70,14 +76,6 @@
                                     </p>
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.ProjectType)
-                                    </p>
-                                    <br/>
-                                    <br/>
-                                    <p class="listingTitle text-right" id="listingUserId">
-                                        WoodUser
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingUserId">
-                                        @User.Identity.Name
                                     </p>
 
                                 </div>
@@ -105,7 +103,11 @@
                                         <p class="listingDetail" id="listingProjectDate">
                                             @Html.DisplayFor(model => listing.PublishDate)
                                         </p>
-                                        
+                                        <p class="listingDetail" id="listingLinks">
+                                            @Html.ActionLink("Edit", "Edit", new { id = listing.Id }) |
+                                            @Html.ActionLink("Details", "Details", new { id = listing.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = listing.Id })
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -134,19 +136,12 @@
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.ProjectType)
                                     </p>
-                                    <br />
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingUserId">
-                                        WoodUser
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingUserId">
-                                        @ViewBag.results
-                                    </p>
+
                                 </div>
                             </div>
 
                         </div>
-                      
+                        
                     }
                     cnt2++;
                 }
@@ -155,5 +150,5 @@
     </div>
 
     <script>
-        
+
     </script>
