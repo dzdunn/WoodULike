@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WoodULike.DAL;
 using WoodULike.Models;
+using WoodULike.ViewModels;
 
 namespace WoodULike.Controllers
 {
@@ -18,29 +20,35 @@ namespace WoodULike.Controllers
         // GET: WoodProjects
         public ActionResult Index(string searchString)
         {
-            
-            var woodProjects = from m in db.WoodProjects
-                               select m;
+            var viewModel = new WoodProjectsWithUsername();
 
-            //var usernames = from m in db.WoodProjects
-            //                join u in db.Users on m.UserId equals u.Id
-            //                select u.UserName;
-            
-            
+            viewModel.WoodProjects = db.WoodProjects.Include(x => x.ApplicationUser).OrderByDescending(x => x.PublishDate);
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                woodProjects = woodProjects.Where(s => 
-                                                    s.ProjectTitle.Contains(searchString) || 
-                                                    s.ProjectType.Contains(searchString) ||
-                                                    s.Description.Contains(searchString));
-            }
 
-            woodProjects = woodProjects.OrderByDescending(x => x.PublishDate);
 
-            
+           
 
-            return View(woodProjects);
+
+           
+
+
+
+            //var woodProjects = from m in db.WoodProjects
+            //                   select m;
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    woodProjects = woodProjects.Where(s => 
+            //                                        s.ProjectTitle.Contains(searchString) || 
+            //                                        s.ProjectType.Contains(searchString) ||
+            //                                        s.Description.Contains(searchString));
+            //}
+
+            //woodProjects = woodProjects.OrderByDescending(x => x.PublishDate);
+
+            //return View(woodProjects);
+
+            return View(viewModel);
         }
 
         public ActionResult MyWoodProjects(string searchString)

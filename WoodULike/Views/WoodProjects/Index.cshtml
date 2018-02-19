@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WoodULike.Models.WoodProject>
+﻿@model WoodULike.ViewModels.WoodProjectsWithUsername
 
 @{
     ViewBag.Title = "Index";
@@ -26,22 +26,21 @@
         <div class="row">
             @{
                 int cnt1 = 0;
-                foreach (var listing in Model)
+                foreach (var listing in Model.WoodProjects)
                 {
                     if (cnt1 % 2 == 0)
                     {
-                       
                         <div class="container projectList pull-left" style="max-width:45%">
                             <div class="row">
                                 <div class="col-md-12">
                                     <p class="listingTitle pull-left" id="listingProjectName">
-                                        @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
+                                        @Html.DisplayNameFor(model => listing.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
                                     </p>
                                     <div class="text-right pull-right">
                                         <p class="listingDetail" id="listingProjectDate">
                                             @Html.DisplayFor(model => listing.PublishDate)
                                         </p>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -57,49 +56,50 @@
                                         </div>
                                     </div>
                                     <br />
-
                                     <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => model.Description)
+                                        @Html.DisplayNameFor(model => listing.Description)
                                     </p>
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.Description)
                                     </p>
                                     <br />
                                     <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => model.ProjectType)
+                                        @Html.DisplayNameFor(model => listing.ProjectType)
                                     </p>
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.ProjectType)
                                     </p>
-                                    <br/>
-                                    <br/>
+                                    <br />
+                                    <br />
                                     <p class="listingTitle text-right" id="listingUserId">
                                         WoodUser
                                     </p>
+                                    @{/*TODO: Add Username to each project */}
+                                    
                                     <p class="listingDetail text-right" id="listingUserId">
-                                        @User.Identity.Name
+                                        
+                                       @Html.DisplayFor(model => listing.ApplicationUser.UserName)
                                     </p>
-
                                 </div>
                             </div>
 
                         </div>
-                       
+
                     }
                     cnt1++;
                 }
                 int cnt2 = 0;
 
-                foreach (var listing in Model)
+                foreach (var listing in Model.WoodProjects)
                 {
                     if (cnt2 % 2 != 0)
                     {
-                       
+
                         <div class="container projectList pull-left" style="max-width:45%">
                             <div class="row">
                                 <div class="col-md-12">
                                     <p class="listingTitle pull-left" id="listingProjectName">
-                                        @Html.DisplayNameFor(model => model.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
+                                        @Html.DisplayNameFor(model => listing.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
                                     </p>
                                     <div class="text-right pull-right">
                                         <p class="listingDetail" id="listingProjectDate">
@@ -122,14 +122,14 @@
                                     </div>
                                     <br />
                                     <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => model.Description)
+                                        @Html.DisplayNameFor(model => listing.Description)
                                     </p>
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.Description)
                                     </p>
                                     <br />
                                     <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => model.ProjectType)
+                                        @Html.DisplayNameFor(model => listing.ProjectType)
                                     </p>
                                     <p class="listingDetail text-right" id="listingProjectDescription">
                                         @Html.DisplayFor(model => listing.ProjectType)
@@ -140,7 +140,7 @@
                                         WoodUser
                                     </p>
                                     <p class="listingDetail text-right" id="listingUserId">
-                                        @ViewBag.results
+                                        @Html.DisplayFor(model => listing.ApplicationUser.UserName)
                                     </p>
                                 </div>
                             </div>

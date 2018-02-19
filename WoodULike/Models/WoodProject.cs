@@ -35,9 +35,9 @@ namespace WoodULike.Models
         [Display(Name = "Project Type")]
         public string ProjectType { get; set; }
 
-        public string UserId { get; set; }
+        public virtual string UserId { get; set; }
         [ForeignKey("UserId")]
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
     }
 

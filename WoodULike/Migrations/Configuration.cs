@@ -5,14 +5,14 @@ namespace WoodULike.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WoodULike.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<WoodULike.DAL.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(WoodULike.Models.ApplicationDbContext context)
+        protected override void Seed(WoodULike.DAL.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
