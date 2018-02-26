@@ -1,9 +1,11 @@
 ﻿@model WoodULike.ViewModels.WoodProjectsWithUsername
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Wood Projects";
+
 }
 
+<h2>@ViewBag.Title</h2>
 
 <div class="container">
     <div class="row">
@@ -11,7 +13,7 @@
         <div class="col-md-6 text-right">
             <p>
                 @using (Html.BeginForm("index", "WoodProjects", FormMethod.Get))
-            {
+                {
                 <p>
                     Project Search: @Html.TextBox("SearchString")
                     <input type="submit" value="Search" class="btn btn-info" id="searchBtn" />
@@ -22,138 +24,36 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            @{
-                int cnt1 = 0;
-                foreach (var listing in Model.WoodProjects)
-                {
-                    if (cnt1 % 2 == 0)
-                    {
-                        <div class="container projectList pull-left" style="max-width:45%">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p class="listingTitle pull-left" id="listingProjectName">
-                                        @Html.DisplayNameFor(model => listing.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
-                                    </p>
-                                    <div class="text-right pull-right">
-                                        <p class="listingDetail" id="listingProjectDate">
-                                            @Html.DisplayFor(model => listing.PublishDate)
-                                        </p>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-
-
-
-                                    <div class="pull-left">
-                                        <div class="img-wrap" id="imageContainer">
-                                            <img class="img-responsive" src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => listing.Description)
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingProjectDescription">
-                                        @Html.DisplayFor(model => listing.Description)
-                                    </p>
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => listing.ProjectType)
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingProjectDescription">
-                                        @Html.DisplayFor(model => listing.ProjectType)
-                                    </p>
-                                    <br />
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingUserId">
-                                        WoodUser
-                                    </p>
-                                    @{/*TODO: Add Username to each project */}
-                                    
-                                    <p class="listingDetail text-right" id="listingUserId">
-                                        
-                                       @Html.DisplayFor(model => listing.ApplicationUser.UserName)
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    }
-                    cnt1++;
-                }
-                int cnt2 = 0;
-
-                foreach (var listing in Model.WoodProjects)
-                {
-                    if (cnt2 % 2 != 0)
-                    {
-
-                        <div class="container projectList pull-left" style="max-width:45%">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p class="listingTitle pull-left" id="listingProjectName">
-                                        @Html.DisplayNameFor(model => listing.ProjectTitle): <span class="projectTitleSpan">@Html.DisplayFor(model => listing.ProjectTitle)</span>
-                                    </p>
-                                    <div class="text-right pull-right">
-                                        <p class="listingDetail" id="listingProjectDate">
-                                            @Html.DisplayFor(model => listing.PublishDate)
-                                        </p>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-
-
-
-                                    <div class="pull-left">
-                                        <div class="img-wrap" id="imageContainer">
-                                            <img class="img-responsive" src="@Html.DisplayFor(model => listing.ImageURL)" id="listingProjectImage" />
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => listing.Description)
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingProjectDescription">
-                                        @Html.DisplayFor(model => listing.Description)
-                                    </p>
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingProjectDescription">
-                                        @Html.DisplayNameFor(model => listing.ProjectType)
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingProjectDescription">
-                                        @Html.DisplayFor(model => listing.ProjectType)
-                                    </p>
-                                    <br />
-                                    <br />
-                                    <p class="listingTitle text-right" id="listingUserId">
-                                        WoodUser
-                                    </p>
-                                    <p class="listingDetail text-right" id="listingUserId">
-                                        @Html.DisplayFor(model => listing.ApplicationUser.UserName)
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                      
-                    }
-                    cnt2++;
-                }
-            }
+@foreach (var project in Model.WoodProjects)
+{
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel">
+                <div class="img-wrap imageContainer" >
+                    <img src="@project.ImageURL" class="center-block img-responsive" style=""/>
+                </div>
+                
+            </div>
+            <div class="panel">
+                <span><strong>Wood Smith:</strong></span> @project.ApplicationUser.UserName 
+                <span class="pull-right">@project.PublishDate.ToShortDateString()</span>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <strong>@project.ProjectTitle.ToUpper()</strong>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        @project.DescriptionTrimmed
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                @Html.ActionLink("See more...", "Details", new { id = project.Id })
+            </div>
         </div>
     </div>
+}
 
-    <script>
-        
-    </script>

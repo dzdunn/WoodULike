@@ -22,8 +22,18 @@ namespace WoodULike.Models
         [DataType(DataType.ImageUrl)]
         public string ImageURL { get; set; }
 
-        [StringLength(300, MinimumLength = 5)]
+        [StringLength(10000)]
         public string Description { get; set; }
+
+        
+        [Display(Name = "Description")]
+        public string DescriptionTrimmed { get {
+                if (this.Description.Length > 650)
+                {
+                    return Description.Substring(0, 650) + "...";
+                } else { return Description; }
+            }
+        }
 
         [ConfigurationPropertyAttribute("enableClientBasedCulture", DefaultValue = true)]
         [Display(Name = "Date")]

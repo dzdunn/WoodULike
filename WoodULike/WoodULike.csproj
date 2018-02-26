@@ -219,6 +219,10 @@
     <Compile Include="Migrations\201801252308328_correctApplicationUser.Designer.cs">
       <DependentUpon>201801252308328_correctApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802190122212_addDescriptionTrimmedProperty.cs" />
+    <Compile Include="Migrations\201802190122212_addDescriptionTrimmedProperty.Designer.cs">
+      <DependentUpon>201802190122212_addDescriptionTrimmedProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -263,6 +267,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\WoodProjects\MyWoodProjects.cshtml" />
+    <Content Include="Views\WoodProjects\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -313,7 +318,6 @@
     <Content Include="Views\WoodProjects\Delete.cshtml" />
     <Content Include="Views\WoodProjects\Details.cshtml" />
     <Content Include="Views\WoodProjects\Edit.cshtml" />
-    <Content Include="Views\WoodProjects\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
@@ -335,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801252308328_correctApplicationUser.resx">
       <DependentUpon>201801252308328_correctApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190122212_addDescriptionTrimmedProperty.resx">
+      <DependentUpon>201802190122212_addDescriptionTrimmedProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

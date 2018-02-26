@@ -20,6 +20,11 @@
     }
 }*/
 
+/*BORDERRRRRRRRRRRRRRR FOR POSITIONINGGGGGGGGGGGGGGG*/
+/*div{
+    border:1px solid red;
+}*/
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -131,7 +136,9 @@ textarea {
 }
 
 /*WoodULike Projects Page*/
-.projectList {
+
+
+/*.projectList {
     background-color: rgba(76, 255, 0, 0.7);
     border: 1px thick black;
     border-radius: 10px;
@@ -159,21 +166,38 @@ textarea {
 }
 
 
-#imageContainer img {
-    width: 400px;
-    height: 250px;
-    
-    object-fit: cover;
-    border-bottom-left-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin: -4px;
-}
+
 
 .projectTitleSpan{
 font-weight: normal;
+}*/
+
+.panel {
+    background-color: rgba(76, 255, 0, 0.7);
+    border: 1px thick black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
 }
 
+.panel:hover {
+    background-color: rgba(164, 64, 6, 0.7);
+}
 
+.panel:hover > .panel-heading {
+    background-color: rgba(164, 64, 6, 0.05);
+}
+
+.panel:hover, .panel:hover > .panel-heading {
+    color: white;
+}
+
+.imageContainer img {
+    height: 250px;
+    width: 400px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
 
 
