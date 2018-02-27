@@ -39,7 +39,7 @@
 
 @foreach (var project in Model.WoodProjects)
 {
-    <div class="row">
+    <div class="row" data-projectid="@project.Id">
         <div class="col-sm-4">
             <div class="panel">
                 <div class="img-wrap imageContainer">
@@ -54,7 +54,7 @@
         </div>
         <div class="col-sm-8">
             <div class="panel panel-success">
-                <div class="panel-heading">
+                <div class="panel-heading" >
                     <strong>@project.ProjectTitle.ToUpper()</strong>
                     <span class="pull-right">@project.ProjectType</span>
                 </div>
@@ -66,6 +66,7 @@
             </div>
             <div class="panel panel-success">
                 @Html.ActionLink("See more...", "Details", new { id = project.Id }, new { @id = "detailsLink" })
+                
             </div>
         </div>
     </div>
@@ -73,11 +74,10 @@
 
 <script>
     $(document).ready(function () {
-
-        $('.panel').on('click', function () {
-            var link = $(this).closest('#detailsLink').attr('href');
-            window.location.href = link;
+        $('.panel').on('click', function (e) {
+            e.preventDefault()
+            var projectid = $(this).closest('.row').data('projectid');
+            window.location.href = "Details/" + projectid;    
         })
     });
-
 </script>
