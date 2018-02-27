@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
 
+
 namespace WoodULike.Models
 {
     public class WoodProject
@@ -48,6 +49,20 @@ namespace WoodULike.Models
         public virtual string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public string[] ProjectTypes =
+        {
+            "Decor",
+            "Cabinets",
+            "Tables",
+            "Book Cases",
+            "Garden",
+            "Carpentry",
+            "Stationary",
+            "Gadgets",
+            "Furniture",
+            "Other"
+        };
 
     }
 

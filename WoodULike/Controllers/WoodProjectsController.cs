@@ -18,32 +18,37 @@ namespace WoodULike.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: WoodProjects
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string searchProjectType)
         {
             var viewModel = new WoodProjectsWithUsername();
 
             viewModel.WoodProjects = db.WoodProjects.Include(x => x.ApplicationUser).OrderByDescending(x => x.PublishDate);
 
+            WoodProject a = new WoodProject();
+            
+            SelectList pTypes = new SelectList(a.ProjectTypes);
+
+            ViewBag.ProjectTypes = pTypes;
 
 
-           
-
-
-           
 
 
 
             //var woodProjects = from m in db.WoodProjects
             //                   select m;
 
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    woodProjects = woodProjects.Where(s => 
-            //                                        s.ProjectTitle.Contains(searchString) || 
-            //                                        s.ProjectType.Contains(searchString) ||
-            //                                        s.Description.Contains(searchString));
-            //}
-
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                viewModel.WoodProjects = viewModel.WoodProjects.Where(s =>
+                                                    s.ProjectTitle.Contains(searchString) ||
+                                                    s.ProjectType.Contains(searchString) ||
+                                                    s.Description.Contains(searchString));
+               
+            }
+            if (!String.IsNullOrEmpty(searchProjectType))
+            {
+                viewModel.WoodProjects = viewModel.WoodProjects.Where(s => s.ProjectType.Contains(searchProjectType));
+            }
             //woodProjects = woodProjects.OrderByDescending(x => x.PublishDate);
 
             //return View(woodProjects);
@@ -60,7 +65,7 @@ namespace WoodULike.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                woodProjects = woodProjects.Where(s => s.ProjectTitle.Contains(searchString) || s.ProjectType.Contains(searchString) || s.Description.Contains(searchString));
+                woodProjects = woodProjects.Where(s => s.ProjectTitle.Contains(searchString) || s.ProjectType.ToString().Contains(searchString) || s.Description.Contains(searchString));
             }
 
             return View(woodProjects);
