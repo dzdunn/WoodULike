@@ -23,8 +23,9 @@
         </dt>
 
         <dd>
-            <img src="@Html.DisplayFor(model => model.ImageURL).ToString()" id="WoodProjectDetailImg" />
+            <img src="~/@Html.DisplayFor(model => model.ImageURL)" id="WoodProjectDetailImg" />
         </dd>
+        
 
         <dt>
             @Html.DisplayNameFor(model => model.Description)

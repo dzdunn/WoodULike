@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -97,19 +98,31 @@ namespace WoodULike.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,ProjectType")] WoodProject woodProject)
+        public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,ProjectType")] WoodProject woodProject, HttpPostedFileBase file)
         {
             
 
             if (ModelState.IsValid)
             {
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/Wood_Project_Images"), fileName);
+                    woodProject.ImageURL = path.Substring(path.IndexOf("Content"));
+                   
+                    file.SaveAs(path);
+                }
+
                 var user = User.Identity.GetUserId();
                 woodProject.UserId = user;
                 woodProject.PublishDate = DateTime.Now;
                 db.WoodProjects.Add(woodProject);
                 db.SaveChanges();
+              
                 return RedirectToAction("Index");
             }
+
+           
 
             return View(woodProject);
         }

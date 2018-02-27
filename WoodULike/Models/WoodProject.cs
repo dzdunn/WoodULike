@@ -19,9 +19,7 @@ namespace WoodULike.Models
         [Display(Name = "WoodULike Project")]
         public string ProjectTitle { get; set; }
 
-        [Display(Name = "Image")]
-        [DataType(DataType.ImageUrl)]
-        public string ImageURL { get; set; }
+       
 
         [StringLength(10000)]
         public string Description { get; set; }
@@ -46,9 +44,32 @@ namespace WoodULike.Models
         [Display(Name = "Project Type")]
         public string ProjectType { get; set; }
 
+        [Display(Name = "Image")]
+        [DataType(DataType.ImageUrl)]
+        public string ImageURL
+        {
+            get
+            {
+                if (ImageURL.StartsWith("Content")) {
+                    return String.Concat("~/", ImageURL);
+                } else {
+                    return ImageURL;
+                }
+            }
+            set
+            {
+                this.ImageURL = value;
+            }
+        } 
+
+        [NotMapped]
+        public HttpPostedFileBase File { get; set; }
+
         public virtual string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        
 
         public string[] ProjectTypes =
         {
