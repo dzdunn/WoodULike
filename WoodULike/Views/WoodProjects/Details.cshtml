@@ -23,10 +23,10 @@
         </dt>
 
         <dd>
-            <img src="~/@Html.DisplayFor(model => model.ImageURL)" id="WoodProjectDetailImg" />
+            <img src="@Model.getCorrectUrl(Html.ValueFor(model => model.ImageURL).ToString())
+" id="WoodProjectDetailImg" />
         </dd>
         
-
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
@@ -57,3 +57,5 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+

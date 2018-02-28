@@ -46,21 +46,7 @@ namespace WoodULike.Models
 
         [Display(Name = "Image")]
         [DataType(DataType.ImageUrl)]
-        public string ImageURL
-        {
-            get
-            {
-                if (ImageURL.StartsWith("Content")) {
-                    return String.Concat("~/", ImageURL);
-                } else {
-                    return ImageURL;
-                }
-            }
-            set
-            {
-                this.ImageURL = value;
-            }
-        } 
+        public string ImageURL { get; set; } 
 
         [NotMapped]
         public HttpPostedFileBase File { get; set; }
@@ -69,7 +55,12 @@ namespace WoodULike.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        
+        public string getCorrectUrl(string imageUrl)
+        {
+            return (imageUrl.StartsWith("Content")) ? ("/" + imageUrl.Replace('\\', '/')) : imageUrl;
+        }
+
+        //(project.ImageURL.ToString().StartsWith("Content")) ? ("/" + project.ImageURL.ToString().Replace('\\', '/')) : project.ImageURL.ToString())
 
         public string[] ProjectTypes =
         {

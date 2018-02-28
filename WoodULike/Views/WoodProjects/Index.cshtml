@@ -46,7 +46,7 @@
         <div class="col-sm-4">
             <div class="panel">
                 <div class="img-wrap imageContainer">
-                    <img src="@project.ImageURL"  class="center-block img-responsive" style="" />
+                    <img src="@project.getCorrectUrl(project.ImageURL)"  class="center-block img-responsive" style="" />
                 </div>
                 
             </div>
@@ -83,7 +83,7 @@
             e.preventDefault()
             var projectid = $(this).closest('.row').data('projectid');
             var location = window.location;
-            if (location.toString().indexOf("WoodProjects") >= 0) {
+            if (location.toString().startsWith("WoodProjects")) {
                 window.location.href = "Details/" + projectid;
             } else {
                 window.location.href = "WoodProjects/Details/" + projectid

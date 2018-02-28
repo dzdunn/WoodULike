@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using WoodULike.DAL;
 using WoodULike.Models;
 using WoodULike.ViewModels;
+using WoodULike.Extensions;
 
 namespace WoodULike.Controllers
 {
@@ -41,9 +42,9 @@ namespace WoodULike.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 viewModel.WoodProjects = viewModel.WoodProjects.Where(s =>
-                                                    s.ProjectTitle.Contains(searchString) ||
-                                                    s.ProjectType.Contains(searchString) ||
-                                                    s.Description.Contains(searchString));
+                                                    s.ProjectTitle.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                                                    s.ProjectType.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                                                    s.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase));
                
             }
             if (!String.IsNullOrEmpty(searchProjectType))
