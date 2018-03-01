@@ -30,6 +30,8 @@ namespace WoodULike.Controllers
             IQueryable<WoodProject> result;
             ViewBag.ProjectTypes = new SelectList(new WoodProject().ProjectTypes);
 
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+
             try
             {
                 result = db.WoodProjects.OrderByDescending(x => x.PublishDate).Include(x => x.ApplicationUser);
