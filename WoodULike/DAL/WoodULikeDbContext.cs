@@ -2,20 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 using WoodULike.Models;
 
 namespace WoodULike.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class WoodULikeDbContext : IdentityDbContext<ApplicationUser>
     {
 
-        public ApplicationDbContext()
+        public WoodULikeDbContext()
             : base("ApplicationUsersContext")
         {
         }
 
         public DbSet<WoodProject> WoodProjects { get; set; }
+
+       
     }
 }

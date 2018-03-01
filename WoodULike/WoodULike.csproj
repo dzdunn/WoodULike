@@ -209,11 +209,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WoodProjectsController.cs" />
-    <Compile Include="DAL\ApplicationDbContext.cs" />
+    <Compile Include="DAL\WoodULikeDbContext.cs" />
+    <Compile Include="DAL\WoodULikeConfiguration.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\Logging.cs" />
+    <Compile Include="DAL\WoodULikeInterceptorLogging.cs" />
+    <Compile Include="DAL\WoodULikeInterceptorTransientErrors.cs" />
     <Compile Include="Migrations\201801252204190_InitialCreate.cs" />
     <Compile Include="Migrations\201801252204190_InitialCreate.Designer.cs">
       <DependentUpon>201801252204190_InitialCreate.cs</DependentUpon>

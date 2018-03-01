@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WoodULike.Logging;
 
 namespace WoodULike
 {
@@ -16,6 +18,13 @@ namespace WoodULike
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //TODO: Interceptor not working correctly. Generates IndexOutOfRange exception in the 
+            //WoodULikeInterceptorTransientErrors 
+
+            //Interceptors
+            //DbInterception.Add(new WoodULikeInterceptorTransientErrors());
+            //DbInterception.Add(new WoodULikeInterceptorLogging());
         }
     }
 }

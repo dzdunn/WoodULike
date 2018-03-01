@@ -14,45 +14,81 @@ using WoodULike.ViewModels;
 using WoodULike.Extensions;
 using PagedList;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
 
 namespace WoodULike.Controllers
 {
     public class WoodProjectsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private WoodULikeDbContext db = new WoodULikeDbContext();
 
         // GET: WoodProjects
         public ActionResult Index(string searchString, string searchProjectType, int? page)
         {
             int pageSize = 5;
             int pageIndex = 1;
-
-            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-
-            var viewModel = db.WoodProjects.OrderByDescending(x => x.PublishDate).Include(x => x.ApplicationUser);
-            
+            IQueryable<WoodProject> result;
             SelectList pTypes = new SelectList(new WoodProject().ProjectTypes);
 
             ViewBag.ProjectTypes = pTypes;
-
-            if (!String.IsNullOrEmpty(searchString))
+            try
             {
-                viewModel = viewModel.Where(s =>
-                s.ProjectTitle.ToLower().Contains(searchString.ToLower()) ||
-                s.ProjectType.ToLower().Contains(searchString.ToLower()) ||
-                s.Description.ToLower().Contains(searchString.ToLower()) 
-                //s.ProjectTitle.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >=0 ||
-                //s.ProjectType.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                //s.Description.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0
-                );    
+                result = db.WoodProjects.OrderByDescending(x => x.PublishDate).Include(x => x.ApplicationUser);
+                if (searchString != null)
+                {
+                    result = db.WoodProjects.Where(x => x.ProjectTitle.Contains(searchString));
+                }
             }
-
-            if (!String.IsNullOrEmpty(searchProjectType))
+            catch (RetryLimitExceededException dex)
             {
-                viewModel = viewModel.Where(s => s.ProjectType.Contains(searchProjectType));
-            }
 
-            return View(viewModel.ToPagedList(pageIndex, pageSize));
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                return View("Error", new HandleErrorInfo(dex, "WoodProject", "Index"));
+            }
+            return View(result.ToPagedList(pageIndex, pageSize));
+
+            //int pageSize = 5;
+            //int pageIndex = 1;
+            ////var viewModel = null;
+            //IQueryable<WoodProject> result;
+
+            //try
+            //{
+                
+
+            //    pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+
+            //    var viewModel = db.WoodProjects.OrderByDescending(x => x.PublishDate).Include(x => x.ApplicationUser);
+
+            //    SelectList pTypes = new SelectList(new WoodProject().ProjectTypes);
+
+            //    ViewBag.ProjectTypes = pTypes;
+
+            //    if (!String.IsNullOrEmpty(searchString))
+            //    {
+            //        viewModel = viewModel.Where(s =>
+            //        s.ProjectTitle.ToLower().Contains(searchString.ToLower()) ||
+            //        s.ProjectType.ToLower().Contains(searchString.ToLower()) ||
+            //        s.Description.ToLower().Contains(searchString.ToLower())
+            //        );
+            //    }
+
+            //    if (!String.IsNullOrEmpty(searchProjectType))
+            //    {
+            //        viewModel = viewModel.Where(s => s.ProjectType.Contains(searchProjectType));
+            //    }
+
+            //    result = viewModel;
+                
+
+            //}
+            //catch (RetryLimitExceededException dex)
+            //{
+            //    //Can log error from dex here
+            //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            //    return View("Error", new HandleErrorInfo(dex, "WoodProject", "Index"));
+            //}
+            //return View(result.ToPagedList(pageIndex, pageSize));
         }
 
         public ActionResult MyWoodProjects(string searchString)
@@ -87,7 +123,7 @@ namespace WoodULike.Controllers
 
         // GET: WoodProjects/Create
         public ActionResult Create()
-        {
+        { 
             bool isUserLoggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
             if (isUserLoggedIn)
             {
@@ -106,29 +142,34 @@ namespace WoodULike.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,ProjectType")] WoodProject woodProject, HttpPostedFileBase file)
         {
-            
-
-            if (ModelState.IsValid)
+            try
             {
-                if (file.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Content/Wood_Project_Images"), fileName);
-                    woodProject.ImageURL = path.Substring(path.IndexOf("Content"));
-                   
-                    file.SaveAs(path);
-                }
+                    if (file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/Wood_Project_Images"), fileName);
+                        woodProject.ImageURL = path.Substring(path.IndexOf("Content"));
 
-                var user = User.Identity.GetUserId();
-                woodProject.UserId = user;
-                woodProject.PublishDate = DateTime.Now;
-                db.WoodProjects.Add(woodProject);
-                db.SaveChanges();
-              
-                return RedirectToAction("Index");
+                        file.SaveAs(path);
+                    }
+
+                    var user = User.Identity.GetUserId();
+                    woodProject.UserId = user;
+                    woodProject.PublishDate = DateTime.Now;
+                    db.WoodProjects.Add(woodProject);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            } catch (RetryLimitExceededException dex)
+            {
+                //Can log dex exception here
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                return View("Error", new HandleErrorInfo(dex, "WoodProject", "Index"));
             }
 
-           
 
             return View(woodProject);
         }
@@ -155,13 +196,22 @@ namespace WoodULike.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ProjectTitle,ImageURL,Description,PublishDate,ProjectType")] WoodProject woodProject)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(woodProject).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(woodProject).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(woodProject);
             }
-            return View(woodProject);
+            catch (RetryLimitExceededException dex)
+            {
+                //Can log dex exception here
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                return View("Error", new HandleErrorInfo(dex, "WoodProject", "Index"));
+            }
         }
 
         // GET: WoodProjects/Delete/5
