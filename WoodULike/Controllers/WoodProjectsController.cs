@@ -28,16 +28,25 @@ namespace WoodULike.Controllers
             int pageSize = 5;
             int pageIndex = 1;
             IQueryable<WoodProject> result;
-            SelectList pTypes = new SelectList(new WoodProject().ProjectTypes);
+            ViewBag.ProjectTypes = new SelectList(new WoodProject().ProjectTypes);
 
-            ViewBag.ProjectTypes = pTypes;
             try
             {
                 result = db.WoodProjects.OrderByDescending(x => x.PublishDate).Include(x => x.ApplicationUser);
-                if (searchString != null)
+                if (!String.IsNullOrEmpty(searchString))
                 {
-                    result = db.WoodProjects.Where(x => x.ProjectTitle.Contains(searchString));
+                    result = db.WoodProjects.Where(x => x.ProjectTitle.ToLower().Contains(searchString.ToLower())
+                        || x.ProjectType.ToLower().Contains(searchString.ToLower()) 
+                        || x.Description.ToLower().Contains(searchString.ToLower()
+                        ));
                 }
+
+                if (!String.IsNullOrEmpty(searchProjectType))
+                {
+                    result = result.Where(x => x.ProjectType.Equals(searchProjectType));
+                }
+
+                result = result.OrderByDescending(x => x.PublishDate);
             }
             catch (RetryLimitExceededException dex)
             {
