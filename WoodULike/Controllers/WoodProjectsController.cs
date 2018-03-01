@@ -12,6 +12,8 @@ using WoodULike.DAL;
 using WoodULike.Models;
 using WoodULike.ViewModels;
 using WoodULike.Extensions;
+using PagedList;
+using System.Collections.ObjectModel;
 
 namespace WoodULike.Controllers
 {
@@ -20,42 +22,37 @@ namespace WoodULike.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: WoodProjects
-        public ActionResult Index(string searchString, string searchProjectType)
+        public ActionResult Index(string searchString, string searchProjectType, int? page)
         {
-            var viewModel = new WoodProjectsWithUsername();
+            int pageSize = 5;
+            int pageIndex = 1;
 
-            viewModel.WoodProjects = db.WoodProjects.Include(x => x.ApplicationUser).OrderByDescending(x => x.PublishDate);
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
 
-            WoodProject a = new WoodProject();
+            var viewModel = db.WoodProjects.OrderByDescending(x => x.PublishDate).Include(x => x.ApplicationUser);
             
-            SelectList pTypes = new SelectList(a.ProjectTypes);
+            SelectList pTypes = new SelectList(new WoodProject().ProjectTypes);
 
             ViewBag.ProjectTypes = pTypes;
 
-
-
-
-
-            //var woodProjects = from m in db.WoodProjects
-            //                   select m;
-
             if (!String.IsNullOrEmpty(searchString))
             {
-                viewModel.WoodProjects = viewModel.WoodProjects.Where(s =>
-                                                    s.ProjectTitle.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                                                    s.ProjectType.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                                                    s.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase));
-               
+                viewModel = viewModel.Where(s =>
+                s.ProjectTitle.ToLower().Contains(searchString.ToLower()) ||
+                s.ProjectType.ToLower().Contains(searchString.ToLower()) ||
+                s.Description.ToLower().Contains(searchString.ToLower()) 
+                //s.ProjectTitle.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >=0 ||
+                //s.ProjectType.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                //s.Description.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0
+                );    
             }
+
             if (!String.IsNullOrEmpty(searchProjectType))
             {
-                viewModel.WoodProjects = viewModel.WoodProjects.Where(s => s.ProjectType.Contains(searchProjectType));
+                viewModel = viewModel.Where(s => s.ProjectType.Contains(searchProjectType));
             }
-            //woodProjects = woodProjects.OrderByDescending(x => x.PublishDate);
 
-            //return View(woodProjects);
-
-            return View(viewModel);
+            return View(viewModel.ToPagedList(pageIndex, pageSize));
         }
 
         public ActionResult MyWoodProjects(string searchString)
@@ -91,7 +88,15 @@ namespace WoodULike.Controllers
         // GET: WoodProjects/Create
         public ActionResult Create()
         {
-            return View();
+            bool isUserLoggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            if (isUserLoggedIn)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         // POST: WoodProjects/Create

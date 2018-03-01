@@ -1,4 +1,5 @@
-﻿@model WoodULike.ViewModels.WoodProjectsWithUsername
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<WoodULike.Models.WoodProject>
 
 @{
     ViewBag.Title = "All Wood Projects";
@@ -38,9 +39,7 @@
     </div>
 @*<img src="~/Content/Wood_Project_Images/conference table.jpg" />*@
 
-@foreach (var project in Model.WoodProjects)
-
-
+@foreach (var project in Model)
 {
     <div class="row" data-projectid="@project.Id">
         <div class="col-sm-4">
@@ -51,7 +50,7 @@
                 
             </div>
             <div class="panel">
-                <span><strong>Wood Smith:</strong></span> @project.ApplicationUser.UserName 
+                <span><strong>Wood Smith:</strong></span> @project.getUserName()
                 <span class="pull-right">@project.PublishDate.ToShortDateString()</span>
             </div>
         </div>
@@ -74,6 +73,15 @@
         </div>
     </div>
 }
+
+<div>
+    <p></p>
+    <p></p>
+    <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
 
 <script>
     $(document).ready(function () {

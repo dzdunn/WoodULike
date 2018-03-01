@@ -55,12 +55,15 @@ namespace WoodULike.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        public string getUserName()
+        {
+            return this.ApplicationUser.UserName;
+        }
+
         public string getCorrectUrl(string imageUrl)
         {
             return (imageUrl.StartsWith("Content")) ? ("/" + imageUrl.Replace('\\', '/')) : imageUrl;
         }
-
-        //(project.ImageURL.ToString().StartsWith("Content")) ? ("/" + project.ImageURL.ToString().Replace('\\', '/')) : project.ImageURL.ToString())
 
         public string[] ProjectTypes =
         {
