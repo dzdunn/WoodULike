@@ -7,13 +7,13 @@ namespace WoodULike.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class removeSetFromAppUserNavProperty : IMigrationMetadata
+    public sealed partial class addDirectoriesArray : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(removeSetFromAppUserNavProperty));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addDirectoriesArray));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803010155417_removeSetFromAppUserNavProperty"; }
+            get { return "201803020002519_addDirectoriesArray"; }
         }
         
         string IMigrationMetadata.Source

@@ -2,7 +2,7 @@
 @model PagedList.IPagedList<WoodULike.Models.WoodProject>
 
 @{
-    ViewBag.Title = "All Wood Projects";
+    ViewBag.Title = "All WoodULike Projects";
 
 }
 
@@ -15,7 +15,7 @@
         <div class="col-sm-9">
                 
                     
-                    @using (Html.BeginForm("index", "WoodProjects", FormMethod.Get))
+                    @using (Html.BeginForm("Index", "WoodProjects", FormMethod.Get))
                     {
                         <div class="form-inline">
                             <p class="pull-right">
@@ -85,17 +85,12 @@
 
 <script>
     $(document).ready(function () {
-        
+
 
         $('.panel').on('click', function (e) {
             e.preventDefault()
             var projectid = $(this).closest('.row').data('projectid');
-            var location = window.location;
-            if (location.toString().startsWith("WoodProjects")) {
-                window.location.href = "Details/" + projectid;
-            } else {
-                window.location.href = "WoodProjects/Details/" + projectid
-            }    
+            window.location.href = '@Url.Action("Details", "WoodProjects")/' + projectid;
         })
     });
 </script>

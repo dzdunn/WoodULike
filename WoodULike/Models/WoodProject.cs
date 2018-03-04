@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
-
+using System.IO;
 
 namespace WoodULike.Models
 {
@@ -49,11 +49,16 @@ namespace WoodULike.Models
         public string ImageURL { get; set; } 
 
         [NotMapped]
-        public HttpPostedFileBase File { get; set; }
+        public HttpPostedFileBase[] Files { get; set; }
 
         public virtual string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public virtual ICollection<ImageFile> ImageFiles { get; set; }
+
+
+
 
         public string getUserName()
         {
@@ -64,6 +69,8 @@ namespace WoodULike.Models
         {
             return (imageUrl.StartsWith("Content")) ? ("/" + imageUrl.Replace('\\', '/')) : imageUrl;
         }
+
+        
 
         public string[] ProjectTypes =
         {

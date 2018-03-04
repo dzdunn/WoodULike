@@ -57,74 +57,39 @@ namespace WoodULike.Controllers
                 return View("Error", new HandleErrorInfo(dex, "WoodProject", "Index"));
             }
             return View(result.ToPagedList(pageIndex, pageSize));
-
-            //int pageSize = 5;
-            //int pageIndex = 1;
-            ////var viewModel = null;
-            //IQueryable<WoodProject> result;
-
-            //try
-            //{
-                
-
-            //    pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-
-            //    var viewModel = db.WoodProjects.OrderByDescending(x => x.PublishDate).Include(x => x.ApplicationUser);
-
-            //    SelectList pTypes = new SelectList(new WoodProject().ProjectTypes);
-
-            //    ViewBag.ProjectTypes = pTypes;
-
-            //    if (!String.IsNullOrEmpty(searchString))
-            //    {
-            //        viewModel = viewModel.Where(s =>
-            //        s.ProjectTitle.ToLower().Contains(searchString.ToLower()) ||
-            //        s.ProjectType.ToLower().Contains(searchString.ToLower()) ||
-            //        s.Description.ToLower().Contains(searchString.ToLower())
-            //        );
-            //    }
-
-            //    if (!String.IsNullOrEmpty(searchProjectType))
-            //    {
-            //        viewModel = viewModel.Where(s => s.ProjectType.Contains(searchProjectType));
-            //    }
-
-            //    result = viewModel;
-                
-
-            //}
-            //catch (RetryLimitExceededException dex)
-            //{
-            //    //Can log error from dex here
-            //    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            //    return View("Error", new HandleErrorInfo(dex, "WoodProject", "Index"));
-            //}
-            //return View(result.ToPagedList(pageIndex, pageSize));
         }
 
-        public ActionResult MyWoodProjects(string searchString)
+        public ActionResult MyWoodProjects(string searchString, string searchProjectType)
         {
             var user = User.Identity.GetUserId();
-            var woodProjects = from m in db.WoodProjects
-                               where m.UserId == user
-                               select m;
+            
+            var userWoodProjects = db.WoodProjects.Where(x => x.UserId == user);
+
+            ViewBag.SearchProjectType = new SelectList(new WoodProject().ProjectTypes);
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                woodProjects = woodProjects.Where(s => s.ProjectTitle.Contains(searchString) || s.ProjectType.ToString().Contains(searchString) || s.Description.Contains(searchString));
+                userWoodProjects = userWoodProjects.Where(s => s.ProjectTitle.Contains(searchString) || s.ProjectType.ToString().Contains(searchString) || s.Description.Contains(searchString));
             }
 
-            return View(woodProjects);
+            if (!String.IsNullOrEmpty(searchProjectType))
+            {
+                userWoodProjects = userWoodProjects.Where(x => x.ProjectType.Equals(searchProjectType));
+            }
+
+            userWoodProjects = userWoodProjects.OrderByDescending(x => x.PublishDate);
+            return View(userWoodProjects);
         }
 
         // GET: WoodProjects/Details/5
         public ActionResult Details(int? id)
-        {
+        {          
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             WoodProject woodProject = db.WoodProjects.Find(id);
+            
             if (woodProject == null)
             {
                 return HttpNotFound();
@@ -138,6 +103,7 @@ namespace WoodULike.Controllers
             bool isUserLoggedIn = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
             if (isUserLoggedIn)
             {
+                ViewBag.ProjectTypes = new SelectList(new WoodProject().ProjectTypes);
                 return View();
             }
             else
@@ -151,28 +117,47 @@ namespace WoodULike.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,ProjectType")] WoodProject woodProject, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "ID,ProjectTitle,ImageURL,Description,ProjectType")] WoodProject woodProject, string projectType, HttpPostedFileBase[] files)
         {
             try
             {
+                ViewBag.ProjectTypes = new SelectList(new WoodProject().ProjectTypes);
+
                 if (ModelState.IsValid)
                 {
-                    if (file.ContentLength > 0)
-                    {
-                        var fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Content/Wood_Project_Images"), fileName);
-                        woodProject.ImageURL = path.Substring(path.IndexOf("Content"));
 
-                        file.SaveAs(path);
+                    woodProject.ProjectType = projectType;
+                    foreach (HttpPostedFileBase file in files)
+                    {
+
+                        var imageFile = new ImageFile();
+                        if (file.ContentLength > 0)
+                        {
+
+                            //TODO: Check for same filename and change file path if needed
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Content/Wood_Project_Images"), fileName);
+
+                            //REMOVE THIS
+                            woodProject.ImageURL = path.Substring(path.IndexOf("Content"));
+
+                            imageFile.WoodProject = woodProject;
+                            imageFile.Directory = path.Substring(path.IndexOf("Content"));
+
+                            db.ImageFiles.Add(imageFile);
+                            file.SaveAs(path);
+                        }
+                        
                     }
 
+                   
                     var user = User.Identity.GetUserId();
                     woodProject.UserId = user;
                     woodProject.PublishDate = DateTime.Now;
                     db.WoodProjects.Add(woodProject);
+                    
                     db.SaveChanges();
-
-                    return RedirectToAction("Index");
+                    
                 }
             } catch (RetryLimitExceededException dex)
             {
@@ -181,8 +166,7 @@ namespace WoodULike.Controllers
                 return View("Error", new HandleErrorInfo(dex, "WoodProject", "Index"));
             }
 
-
-            return View(woodProject);
+            return RedirectToAction("Index");
         }
 
         // GET: WoodProjects/Edit/5
@@ -246,7 +230,13 @@ namespace WoodULike.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             WoodProject woodProject = db.WoodProjects.Find(id);
+            var result = db.ImageFiles.Where(x => x.WoodProject.Id == id);
             db.WoodProjects.Remove(woodProject);
+
+            foreach (var image in result)
+            {
+                db.ImageFiles.Remove(image);
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

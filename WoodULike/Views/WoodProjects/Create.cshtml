@@ -11,12 +11,12 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal" >
         <h4>WoodProject</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group" >
+            @Html.LabelFor(model => model.ProjectTitle, htmlAttributes: new { @class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ProjectTitle, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProjectTitle, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class="form-control", rows="20", @id="createDescription"} )
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProjectType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("ProjectType",
+                                ViewBag.ProjectTypes as SelectList,
+                                "All Categories",
+                                new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ProjectType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,8 +58,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ImageURL, htmlAttributes: new { @class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.File, new { @type = "file", @name = "File", @id = "File" })
-                @Html.ValidationMessageFor(m => m.File)
+                @Html.TextBoxFor(m => m.Files, new { @type = "file", @name = "Files", @id = "Files", @multiple = "multiple" })
+                @Html.ValidationMessageFor(m => m.Files)
                 @*<p>File: </p>
                 <input type="file" name="File" id="File"/>
                 <p>&nbsp;</p>

@@ -10,23 +10,27 @@
     <h4>WoodProject</h4>
     <hr />
     <dl class="dl-horizontal">
+       
+       
         <dt>
-            @Html.DisplayNameFor(model => model.ProjectTitle)
+            
+           @Html.DisplayNameFor(model => model.ProjectTitle)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ProjectTitle)
         </dd>
-
+        
         <dt>
             @Html.DisplayNameFor(model => model.ImageURL)
         </dt>
 
         <dd>
-            <img src="@Model.getCorrectUrl(Html.ValueFor(model => model.ImageURL).ToString())
-" id="WoodProjectDetailImg" />
+         
+            <img src="@Model.getCorrectUrl(Html.ValueFor(model => model.ImageURL).ToString())" id="WoodProjectDetailImg" />
+            
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
@@ -50,7 +54,11 @@
         <dd>
             @Html.DisplayFor(model => model.ProjectType)
         </dd>
-
+        
+        @foreach (var x in Model.ImageFiles)
+        {
+            <img src="@x.getCorrectUrl(x.Directory)" id="WoodProjectDetailImg" />
+        }
     </dl>
 </div>
 <p>

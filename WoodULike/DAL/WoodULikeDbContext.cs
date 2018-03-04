@@ -18,7 +18,7 @@ namespace WoodULike.DAL
         }
 
         public DbSet<WoodProject> WoodProjects { get; set; }
+        public DbSet<ImageFile> ImageFiles { get; set; }
 
-       
     }
 }

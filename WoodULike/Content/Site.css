@@ -197,11 +197,32 @@ font-weight: normal;
     width: 400px;
     object-fit: cover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px
 }
 
+/*textarea{
+   width: 1000px;
+   height: 1000px;
+   
+}*/
+
+/*#createForm {
+    width: 400px;
+}
+
+.form-horizontal .form-control{
+    width: 500px;
+}*/
+
+/*.form-control {
+    width: 800px !important;
+    height: 1000px;
+}*/
 
 
-
+#createDescription {
+    max-width: 1000px;
+}
 
 
 

@@ -235,16 +235,22 @@
     <Compile Include="Migrations\201802190122212_addDescriptionTrimmedProperty.Designer.cs">
       <DependentUpon>201802190122212_addDescriptionTrimmedProperty.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803010155417_removeSetFromAppUserNavProperty.cs" />
-    <Compile Include="Migrations\201803010155417_removeSetFromAppUserNavProperty.Designer.cs">
-      <DependentUpon>201803010155417_removeSetFromAppUserNavProperty.cs</DependentUpon>
+    <Compile Include="Migrations\201803020002519_addDirectoriesArray.cs" />
+    <Compile Include="Migrations\201803020002519_addDirectoriesArray.Designer.cs">
+      <DependentUpon>201803020002519_addDirectoriesArray.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803021606449_createImageFileModel.cs" />
+    <Compile Include="Migrations\201803021606449_createImageFileModel.Designer.cs">
+      <DependentUpon>201803021606449_createImageFileModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImageFile.cs" />
     <Compile Include="Models\WoodProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\WoodProjectDetailsViewModel.cs" />
     <Compile Include="ViewModels\WoodProjectsWithUsername.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -361,8 +367,11 @@
     <EmbeddedResource Include="Migrations\201802190122212_addDescriptionTrimmedProperty.resx">
       <DependentUpon>201802190122212_addDescriptionTrimmedProperty.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803010155417_removeSetFromAppUserNavProperty.resx">
-      <DependentUpon>201803010155417_removeSetFromAppUserNavProperty.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803020002519_addDirectoriesArray.resx">
+      <DependentUpon>201803020002519_addDirectoriesArray.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803021606449_createImageFileModel.resx">
+      <DependentUpon>201803021606449_createImageFileModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
