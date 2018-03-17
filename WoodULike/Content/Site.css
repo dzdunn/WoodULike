@@ -137,41 +137,6 @@ textarea {
 
 /*WoodULike Projects Page*/
 
-
-/*.projectList {
-    background-color: rgba(76, 255, 0, 0.7);
-    border: 1px thick black;
-    border-radius: 10px;
-    padding: 5px;
-    margin: 5px;
-   
-}
-
-.projectList:hover {
-    background-color: rgba(164, 64, 6, 0.7);
-    color: white;
-}
-
-
-.listingTitle{
-    font-weight: bold;
-    font-size: larger;
-    padding: 0px 0px 0px 10px;
-    margin-top: -5px;
-}
-
-.listingDetail {
-    font-size: smaller;
-    padding: 0px 0px 0px 10px;
-}
-
-
-
-
-.projectTitleSpan{
-font-weight: normal;
-}*/
-
 .panel {
     background-color: rgba(76, 255, 0, 0.7);
     border: 1px thick black;
@@ -219,9 +184,37 @@ font-weight: normal;
     height: 1000px;
 }*/
 
+/*Create Page*/
+
 
 #createDescription {
     max-width: 1000px;
+}
+
+/*Details Page*/
+
+#detailGallery {
+    height: 250px;
+    width: 400px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px
+}
+
+.detailHeader {
+    font-size: 22px;
+}
+
+.imageContainer .galleryIcon {
+    height: 100px;
+    width: 200px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px
+}
+
+.active {
+    background-color: red;
 }
 
 
