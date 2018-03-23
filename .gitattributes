@@ -1,3 +1,7 @@
+# Ignore Scripts and content
+Scripts/* linguist-vendored
+Content/* linguist-vendored
+
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
