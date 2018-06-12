@@ -18,9 +18,9 @@ namespace WoodULike.Models
 
         public virtual WoodProject WoodProject { get; set; }
 
-        public string getCorrectUrl(string imageUrl)
+        public string getCorrectUrl()
         {
-            return (imageUrl.StartsWith("Content")) ? ("/" + imageUrl.Replace('\\', '/')) : imageUrl;
+            return (Directory.StartsWith("Content")) ? ("/" + Directory.Replace('\\', '/')) : Directory;
         }
     }
 }

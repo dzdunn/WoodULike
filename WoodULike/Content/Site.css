@@ -193,7 +193,7 @@ textarea {
 
 /*Details Page*/
 
-#detailGallery {
+/*#detailGallery {
     height: 250px;
     width: 400px;
     object-fit: cover;
@@ -201,9 +201,7 @@ textarea {
     border: 1px
 }
 
-.detailHeader {
-    font-size: 22px;
-}
+
 
 .imageContainer .galleryIcon {
     height: 100px;
@@ -215,6 +213,37 @@ textarea {
 
 .active {
     background-color: red;
+}*/
+
+.detailHeader {
+	font-size: 22px;
+}
+
+.gallery-img-wrapper{
+	
+}
+
+.img-single {
+	height: 130px;
+	width: 220px;
+	position: relative;
+	margin: 5px 10px;
+	overflow: hidden;
+}
+
+.img-single img {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	object-fit: cover;
+	
+}
+
+.img-single:hover {
+	height: 110%;
+	width: 110%;
+	position: relative;	
+	z-index:1000;
 }
 
 

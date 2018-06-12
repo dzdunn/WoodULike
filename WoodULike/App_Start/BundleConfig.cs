@@ -10,7 +10,8 @@ namespace WoodULike
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.cycle2.min.js"));
+                        "~/Scripts/jquery.cycle2.min.js",
+						"~/Scripts/lightbox.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -30,7 +31,8 @@ namespace WoodULike
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+					  "~/Content/lightbox.css"));
 
         }
     }
