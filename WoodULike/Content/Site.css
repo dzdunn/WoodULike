@@ -137,6 +137,10 @@ textarea {
 
 /*WoodULike Projects Page*/
 
+.woodProjectRows{
+	height: 250px;
+}
+
 .panel {
     background-color: rgba(76, 255, 0, 0.7);
     border: 1px thick black;
@@ -157,6 +161,7 @@ textarea {
     color: white;
 }
 
+
 .imageContainer img {
     height: 250px;
     width: 400px;
@@ -165,12 +170,15 @@ textarea {
     border: 1px
 }
 
+#woodProjectDescription {
+	min-height: 262px;
+}
+
 /*textarea{
    width: 1000px;
    height: 1000px;
    
 }*/
-
 /*#createForm {
     width: 400px;
 }
@@ -178,17 +186,13 @@ textarea {
 .form-horizontal .form-control{
     width: 500px;
 }*/
-
 /*.form-control {
     width: 800px !important;
     height: 1000px;
 }*/
-
 /*Create Page*/
-
-
 #createDescription {
-    max-width: 1000px;
+	max-width: 1000px;
 }
 
 /*Details Page*/
